@@ -1,11 +1,10 @@
 # asset-manager
 
-Extension of the connect-asset library that allows you to declare multiple asset folders that will be searched when
+Static asset manager that allows you to declare multiple asset folders that will be searched when
 resolving static assets in your app.  This library also provides the ability to precompile all of the static assets
-into their production form.  The precompile step generates a manifest file that will be used in production to resolve
-requested assets.
-
-Note: Consuming the manifest file in production still needs to be implemented.
+into their production form (e.g., minified content with hashed filenames).  The precompile step generates a manifest 
+file that will be used in production to resolve requested assets.  It also generates a clientManifest that can be in the
+browser to dynamically load static assets (e.g., people using the Inject dependency management library - https://github.com/linkedin/inject)
 
 ## How?
 
@@ -19,26 +18,39 @@ Then add this line to your app's configuration:
 
 Finally, initialize the manager with the paths it should search for static assets:
 
-    assetManager.init({
-        paths: ["assets", "../global/assets", "vendor")]
+    assetManager.start({
+        paths: ["assets", 
+                "../global/assets", 
+                "vendor")],
+        inProd: (process.env.NODE_ENV === 'production')
       }, callback);
 
 ### Markup functions
 
-`connect-assets` provides three global functions named `img`, `js`, and `css`. Use them in your views. They tell connect-assets to do any necessary compilation, then return the markup you need. For instance, in a [Jade template](http://jade-lang.com/), the code
+`asset-manager` provides three global functions named `img`, `js`, and `css`. Use them in your views to resolve
+static assets into the markup need to resolve these assets in your page. For instance, in an [EJS template]:
 
-    != css('normalize')
-    != js('jquery')
-    != img('icon')
+    <%- css('normalize') %>
+    <%- js('jquery') %>
+    <%- img('icon') %>
 
-See [connect-assets](http://github.com/TrevorBurnham/connect-assets) for more information.
+### Express Middleware
+
+If you want to have your app serve the static assets as well (a likely case at dev time), you can use the provided
+Express middle ware to do this:
+
+  app.use(assetManager.expressMiddleware);
 
 ### Precompile assets
 
-You can precompile your assets into their production form as follows:
+You can precompile your assets into their production form as follows (CDN_BASE_URL should be set to whatever url you want
+prepended to your static asset paths):
 
   assetManager.precompile({
-      paths: ["assets", "../global/assets", "vendor")]
+      paths: ["assets", 
+              "../global/assets", 
+              "vendor")],
+      servePath: CDN_BASE_URL
     }, callback);
 
 ## Options
@@ -47,5 +59,6 @@ If you like, you can pass any of these options to the `init` function:
 
 * `paths` (required): An array of paths that should be used to find static assets.
 * `inProd` (defaults to `false`): Indicates whether the application is running in production mode or not. 
-* `app` (defaults to null): The `app` from your express.createServer call that is used to inject connect-asset as middleware
 * `servePath` (defaults to ''): The path you want to append to all asset urls.  Useful for pointing at an external CDN location.
+* `builtAssets` (defaults to 'builtAssets'): The folder you want precompiled assets to be placed in.
+* `context` (defaults to global): The object you want to hang the 'css', 'js', and 'img' functions on for resolving static assets.
