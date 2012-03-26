@@ -123,6 +123,16 @@ buster.testCase("Utils tests", {
     }
   },
 
+  "Test gzipFile": {
+    "gzip a JS file": function(done){
+      var contents = "var i=0;";
+      this.utils.gzipString(contents, function(err, zipped){
+        assert.equals("H4sIAAAAAAAAAytLLFLItDWwBgB8kiehCAAAAA==", zipped.toString('base64'));
+        done();
+      });
+    }
+  },
+
   "Test generateHash": {
     "Hash a string": function(){
       var s = "This is my string";

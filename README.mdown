@@ -21,7 +21,7 @@ Finally, initialize the manager with the paths it should search for static asset
     assetManager.start({
         paths: ["assets", 
                 "../global/assets", 
-                "vendor")],
+                "vendor"],
         inProd: (process.env.NODE_ENV === 'production')
       }, callback);
 
@@ -41,6 +41,13 @@ Express middle ware to do this:
 
     app.use(assetManager.expressMiddleware);
 
+### Express Production Middleware
+
+If you want to have your app serve the static assets in production as well, you can use the provided static
+Express middle ware to do this (the final parameter is whether or not the assets are gzip encoded):
+
+    app.use(assetManager.staticAssetMiddleware(express.static(__dirname + '/builtAssets', { maxAge: 31536000000 }), true));
+
 ### Precompile assets
 
 You can precompile your assets into their production form as follows (CDN_BASE_URL should be set to whatever url you want
@@ -50,15 +57,17 @@ prepended to your static asset paths):
         paths: ["assets", 
                 "../global/assets", 
                 "vendor")],
-        servePath: CDN_BASE_URL
+        servePath: CDN_BASE_URL,
+        gzip: true
       }, callback);
 
 ## Options
 
-If you like, you can pass any of these options to the `start` function:
+If you like, you can pass any of these options to the `start` or `precompile` functions:
 
 * `paths` (required): An array of paths that should be used to find static assets.
 * `inProd` (defaults to `false`): Indicates whether the application is running in production mode or not. 
 * `servePath` (defaults to ''): The path you want to append to all asset urls.  Useful for pointing at an external CDN location.
 * `builtAssets` (defaults to 'builtAssets'): The folder you want precompiled assets to be placed in.
 * `context` (defaults to global): The object you want to hang the 'css', 'js', and 'img' functions on for resolving static assets.
+* `gzip` (defaults to false): Whether or not to gzip the contents of 'css' and 'js' files.
