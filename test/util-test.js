@@ -118,7 +118,7 @@ buster.testCase("Utils tests", {
       var jsString = "var j = 1;";
       var compressed = this.utils.compressJS(jsString);
     
-      assert.typeOf(compressed, "string");
+      assert.equals(typeof(compressed), "string");
       assert.equals("var j=1", compressed);
     }
   },
@@ -138,7 +138,7 @@ buster.testCase("Utils tests", {
       var s = "This is my string";
       var hash = this.utils.generateHash(s);
     
-      assert.typeOf(hash, "string");
+      assert.equals(typeof(hash), "string");
       assert.equals("c2a9ce57e8df081b4baad80d81868bbb", hash);
     
       s = s + " ";
@@ -159,7 +159,7 @@ buster.testCase("Utils tests", {
       var html = "<html><body>MyText</body></html>";
       var js = this.utils.convertHTMLtoJS(html);
     
-      assert.typeOf(js, "string");
+      assert.equals(typeof(js), "string");
       assert.equals(this.appendSnippetCode("\nvar snippetsRaw = \"MyText\\n\" + \n\"\";"), js);
     },
   
@@ -167,7 +167,7 @@ buster.testCase("Utils tests", {
       var html = "<html><body><a href='hello'>MyText</a></body></html>";
       var js = this.utils.convertHTMLtoJS(html);
     
-      assert.typeOf(js, "string");
+      assert.equals(typeof(js), "string");
       assert.equals(this.appendSnippetCode("\nvar snippetsRaw = \"<a href='hello'>MyText</a>\\n\" + \n\"\";"), js);
     },
   
@@ -175,7 +175,7 @@ buster.testCase("Utils tests", {
       var html = "<html><body><a href=\"hello\">MyText</a></body></html>";
       var js = this.utils.convertHTMLtoJS(html);
     
-      assert.typeOf(js, "string");
+      assert.equals(typeof(js), "string");
       assert.equals(this.appendSnippetCode("\nvar snippetsRaw = \"<a href=\\\"hello\\\">MyText</a>\\n\" + \n\"\";"), js);
     },
   
@@ -183,7 +183,7 @@ buster.testCase("Utils tests", {
       var html = "<html><body>MyText\nNewLine</body></html>";
       var js = this.utils.convertHTMLtoJS(html);
     
-      assert.typeOf(js, "string");
+      assert.equals(typeof(js), "string");
       assert.equals(this.appendSnippetCode("\nvar snippetsRaw = \"MyText\\n\" + \n\"NewLine\\n\" + \n\"\";"), js);
     },
   
@@ -191,7 +191,7 @@ buster.testCase("Utils tests", {
       var html = "<html><body>MyText\nRemoveLine<!-- exclude LINE -->\nLastLine</body></html>";
       var js = this.utils.convertHTMLtoJS(html);
     
-      assert.typeOf(js, "string");
+      assert.equals(typeof(js), "string");
       assert.equals(this.appendSnippetCode("\nvar snippetsRaw = \"MyText\\n\" + \n\"LastLine\\n\" + \n\"\";"), js);
     },
   
@@ -199,7 +199,7 @@ buster.testCase("Utils tests", {
       var html = "<html><body>MyText\n<!-- exclude START -->\nRemoveLine1\nRemoveLine2\n<!-- exclude END -->\nLastLine</body></html>";
       var js = this.utils.convertHTMLtoJS(html);
     
-      assert.typeOf(js, "string");
+      assert.equals(typeof(js), "string");
       assert.equals(this.appendSnippetCode("\nvar snippetsRaw = \"MyText\\n\" + \n\"LastLine\\n\" + \n\"\";"), js);
     }
   }
