@@ -96,10 +96,11 @@ buster.testCase("Utils tests", {
     "expand wildcard path": function(done){
       var basePaths = ['test/*'];
       this.utils.expandPaths(basePaths, function(paths) {
-        assert.equals(paths.length, 4);
+        assert.equals(paths.length, 5);
         refute.equals(paths.indexOf("test/app1"), -1);
         refute.equals(paths.indexOf("test/app2"), -1);
         refute.equals(paths.indexOf("test/app3"), -1);
+        refute.equals(paths.indexOf("test/app4"), -1);
         done();
       });
     },

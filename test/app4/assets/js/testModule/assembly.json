@@ -1,0 +1,7 @@
+{
+  "files": [
+    "main.js",
+    "shared-ui-assets.js",
+    "shared-ui-vendors.js"
+  ]
+}
