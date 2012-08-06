@@ -45,7 +45,7 @@ buster.testCase("contentResolver tests", {
   
   "Test assembled module resolution with NO compression": {
     setUp: function(){
-      this.cf = this.cr(['test/app1', 'test/app2', 'test/app4/assets', 'test/app4/node_modules/shared-ui-dummy/assets', 'test/app4/node_modules/shared-ui-dummy/vendors/taco'], false);
+      this.cf = this.cr(['test/app1', 'test/app2', 'test/app4/assets', 'test/app4/dummy_modules/shared-ui-dummy/assets', 'test/app4/dummy_modules/shared-ui-dummy/vendors/taco'], false);
     },
     
     "for a simpleModule": function() {
