@@ -141,6 +141,24 @@ buster.testCase("Asset Manager", {
       });
     },
     
+    "css with embedded url to non-existent image": function(done) {
+      var tmpDir = this.tmpDir;
+      this.am.precompile({
+        paths: ['test/app1', 'test/app2'],
+        servePath: "CDNPath",
+        builtAssets: tmpDir,
+        gzip: false
+      }, function(){
+        var filePath = path.join(tmpDir, "css", "appWithUrl-7508ca150a5b90fff570b5600a62a740.css");
+        assert.equals(true, path.existsSync(filePath));
+        var contents = fs.readFileSync(filePath, 'UTF-8');
+        refute.equals(-1, contents.indexOf('/CDNPath/img/arrow2-dd0ecf27272f0daade43058090491241.png'));
+        refute.equals(-1, contents.indexOf('UNABLE_TO_RESOLVE_IMAGE_PATH'));
+        
+        done();
+      });
+    },
+    
     "//other languages that all fallback to english": function(done) {
       var tmpDir = this.tmpDir;
       this.am.precompile({
