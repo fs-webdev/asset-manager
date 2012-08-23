@@ -85,6 +85,12 @@ buster.testCase("Asset Manager", {
       
       "check img resolution": function(){
         assert.equals("/img/arrow3-dd0ecf27272f0daade43058090491241.png", this.context.img("arrow3.png"));
+      },
+      
+      "check font resolution": function(){
+        assert.equals("/img/webfonts/League_Gothic-webfont-036cfa9c2ade08c1a4ee234526201dc8.eot", this.context.img("webfonts/League_Gothic-webfont.eot"));
+        assert.equals("/img/webfonts/League_Gothic-webfont-036cfa9c2ade08c1a4ee234526201dc8.eot?#iefix", this.context.img("webfonts/League_Gothic-webfont.eot?#iefix"));
+        assert.equals("/img/webfonts/League_Gothic-webfont-036cfa9c2ade08c1a4ee234526201dc8.eot#iefix", this.context.img("webfonts/League_Gothic-webfont.eot#iefix"));
       }
     }
   },
@@ -101,8 +107,8 @@ buster.testCase("Asset Manager", {
         assert.equals(true, path.existsSync(path.join(tmpDir, "js", "app3-29b858db32acb754b5a863b899c58d4d.js")));
         assert.equals(true, path.existsSync(path.join(tmpDir, "js", "app3-29b858db32acb754b5a863b899c58d4d_raw.js")));
         
-        assert.equals(true, path.existsSync(path.join(tmpDir, "js", "clientManifest-5f9f3f5165419b036895edcb12b9dae5.js")));
-        assert.equals(true, path.existsSync(path.join(tmpDir, "js", "clientManifest-5f9f3f5165419b036895edcb12b9dae5_raw.js")));
+        assert.equals(true, path.existsSync(path.join(tmpDir, "js", "clientManifest-8183c3f94982f32eeb56b995b8b231d0.js")));
+        assert.equals(true, path.existsSync(path.join(tmpDir, "js", "clientManifest-8183c3f94982f32eeb56b995b8b231d0_raw.js")));
         
         assert.equals(true, path.existsSync(path.join(tmpDir, "manifest.json")));
         
