@@ -14,6 +14,9 @@
   "devDependencies": {
     "buster": "0.6.x"
   },
+  "scripts": {
+    "test": "buster test"
+  },
   "main": "lib/asset-manager.js",
   "engines": { "node": ">= 0.6.3" },
   "contributors": [
