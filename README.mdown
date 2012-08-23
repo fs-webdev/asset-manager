@@ -1,4 +1,3 @@
-[![build status](https://secure.travis-ci.org/fs-webdev/asset-manager.png)](http://travis-ci.org/fs-webdev/asset-manager)
 # asset-manager
 
 Static asset manager that allows you to declare multiple asset folders that will be searched when
@@ -6,6 +5,8 @@ resolving static assets in your app.  This library also provides the ability to 
 into their production form (e.g., minified content with hashed filenames).  The precompile step generates a manifest 
 file that will be used in production to resolve requested assets.  It also generates a clientManifest that can be in the
 browser to dynamically load static assets (e.g., people using the Inject dependency management library - https://github.com/linkedin/inject)
+
+[![build status](https://secure.travis-ci.org/fs-webdev/asset-manager.png)](http://travis-ci.org/fs-webdev/asset-manager)
 
 ## How?
 
