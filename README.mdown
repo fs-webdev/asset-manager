@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/fs-webdev/asset-manager.png)](http://travis-ci.org/fs-webdev/asset-manager)
 # asset-manager
 
 Static asset manager that allows you to declare multiple asset folders that will be searched when
