@@ -155,11 +155,11 @@ buster.testCase("Asset Manager", {
         builtAssets: tmpDir,
         gzip: false
       }, function(){
-        var filePath = path.join(tmpDir, "css", "appWithUrl-7508ca150a5b90fff570b5600a62a740.css");
+        var filePath = path.join(tmpDir, "css", "appWithUrl-ae0d0be75519249c281ddda1fddb89b8.css");
         assert.equals(true, path.existsSync(filePath));
         var contents = fs.readFileSync(filePath, 'UTF-8');
         refute.equals(-1, contents.indexOf('/CDNPath/img/arrow2-dd0ecf27272f0daade43058090491241.png'));
-        refute.equals(-1, contents.indexOf('UNABLE_TO_RESOLVE_IMAGE_PATH'));
+        refute.equals(-1, contents.indexOf("url('missingImage.png')"));
         
         done();
       });

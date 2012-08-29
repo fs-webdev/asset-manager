@@ -1,7 +1,7 @@
 {
   "name": "asset-manager",
   "description": "Asset manager built on top of connect-asset for managing multiple asset folders.",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "author": "FamilySearch Web Developers",
   "repository": {"type": "git", "url": "git://github.com/fs-webdev/asset-manager.git"},
   "dependencies": {
