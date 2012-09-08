@@ -73,3 +73,4 @@ If you like, you can pass any of these options to the `start` or `precompile` fu
 * `builtAssets` (defaults to 'builtAssets'): The folder you want precompiled assets to be placed in.
 * `context` (defaults to global): The object you want to hang the 'css', 'js', and 'img' functions on for resolving static assets.
 * `gzip` (defaults to false): Whether or not to gzip the contents of 'css' and 'js' files.
+* `scanDir` (defaults to ''): Include a base path you want asset-manager to scan for modules that contain `asset-manifest.json` files indicating the module contains static assets that should be available for use.

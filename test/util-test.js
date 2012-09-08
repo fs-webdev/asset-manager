@@ -76,7 +76,7 @@ buster.testCase("Utils tests", {
   "Test expandPaths": {
     "expand a single path": function(done){
       var basePaths = ['test/app1'];
-      this.utils.expandPaths(basePaths, function(paths) {
+      this.utils.expandPaths(basePaths, false, function(paths) {
         assert.same(paths.length, 1);
         assert.same(paths[0], "test/app1");
         done();
@@ -85,7 +85,7 @@ buster.testCase("Utils tests", {
   
     "expand multiple paths": function(done){
       var basePaths = ['test/app1', 'test/app2'];
-      this.utils.expandPaths(basePaths, function(paths) {
+      this.utils.expandPaths(basePaths, false, function(paths) {
         assert.equals(paths.length, 2);
         refute.equals(paths.indexOf("test/app1"), -1);
         refute.equals(paths.indexOf("test/app2"), -1);
@@ -95,7 +95,7 @@ buster.testCase("Utils tests", {
   
     "expand wildcard path": function(done){
       var basePaths = ['test/app*'];
-      this.utils.expandPaths(basePaths, function(paths) {
+      this.utils.expandPaths(basePaths, false, function(paths) {
         assert.equals(paths.length, 4);
         refute.equals(paths.indexOf("test/app1"), -1);
         refute.equals(paths.indexOf("test/app2"), -1);
@@ -105,9 +105,19 @@ buster.testCase("Utils tests", {
       });
     },
   
+    "expand with scanDir path": function(done){
+      var basePaths = ['test/app1'];
+      this.utils.expandPaths(basePaths, "test/test_modules", function(paths) {
+        assert.equals(paths.length, 2);
+        refute.equals(paths.indexOf("test/app1"), -1);
+        refute.equals(paths.indexOf("test/test_modules/moduleWithControls/assets"), -1);
+        done();
+      });
+    },
+  
     "expand invalid path": function(done){
       var basePaths = ['noPath/here'];
-      this.utils.expandPaths(basePaths, function(paths) {
+      this.utils.expandPaths(basePaths, false, function(paths) {
         assert.same(paths.length, 0);
         done();
       });

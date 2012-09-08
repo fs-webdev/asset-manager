@@ -49,10 +49,34 @@ buster.testCase("Asset Manager", {
       "check css resolution": function(){
         assert.equals("<link href='/css/app3.css' rel='stylesheet' media='screen'>", this.context.css("app3.css"));
         assert.equals("<link href='/css/app3.css' rel='stylesheet' media='print'>", this.context.css({print : 'app3.css'}));
+        assert.equals("", this.context.css("mynonexistentfile.css"));
       },
       
       "check img resolution": function(){
         assert.equals("/img/arrow3.png", this.context.img("arrow3.png"));
+      }
+    },
+    
+    "with scanDir": {
+      setUp: function(done) {
+        this.am.start({
+          paths: ['test/app3'],
+          context: this.context,
+          scanDir: "test/test_modules"
+        }, function(){
+          done();
+        });
+      },
+      
+      "check asset function existence": function(){
+        assert.isFunction(this.context.css);
+        assert.isFunction(this.context.js);
+        assert.isFunction(this.context.img);
+      },
+      
+      "check css resolution": function(){
+        assert.equals("<link href='/css/module.css' rel='stylesheet' media='screen'>", this.context.css("module.css"));
+        refute.equals("<link href='/css/noModule.css' rel='stylesheet' media='print'>", this.context.css('noModule.css'));
       }
     },
     
