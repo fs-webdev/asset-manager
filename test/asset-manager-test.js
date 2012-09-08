@@ -75,7 +75,7 @@ buster.testCase("Asset Manager", {
       },
       
       "check js resolution": function(){
-        assert.equals("<script src='/js/app3-29b858db32acb754b5a863b899c58d4d.js'></script>", this.context.js("app3.js"));
+        assert.equals("<script src='/js/app3-cb248e942f61a08ff6f783b491bcfa4e.js'></script>", this.context.js("app3.js"));
       },
       
       "check css resolution": function(){
@@ -104,11 +104,11 @@ buster.testCase("Asset Manager", {
         builtAssets: tmpDir,
         gzip: true
       }, function(){
-        assert.equals(true, path.existsSync(path.join(tmpDir, "js", "app3-29b858db32acb754b5a863b899c58d4d.js")));
-        assert.equals(true, path.existsSync(path.join(tmpDir, "js", "app3-29b858db32acb754b5a863b899c58d4d_raw.js")));
+        assert.equals(true, path.existsSync(path.join(tmpDir, "js", "app3-cb248e942f61a08ff6f783b491bcfa4e.js")));
+        assert.equals(true, path.existsSync(path.join(tmpDir, "js", "app3-cb248e942f61a08ff6f783b491bcfa4e_raw.js")));
         
-        assert.equals(true, path.existsSync(path.join(tmpDir, "js", "clientManifest-8183c3f94982f32eeb56b995b8b231d0.js")));
-        assert.equals(true, path.existsSync(path.join(tmpDir, "js", "clientManifest-8183c3f94982f32eeb56b995b8b231d0_raw.js")));
+        assert.equals(true, path.existsSync(path.join(tmpDir, "js", "clientManifest-f75a99ac26c50c135c5e28d09cc4220d.js")));
+        assert.equals(true, path.existsSync(path.join(tmpDir, "js", "clientManifest-f75a99ac26c50c135c5e28d09cc4220d_raw.js")));
         
         assert.equals(true, path.existsSync(path.join(tmpDir, "manifest.json")));
         
@@ -125,10 +125,10 @@ buster.testCase("Asset Manager", {
         
         assert.equals("app3.js", manifest['app3.js']["requested"]);
         assert.equals("js", manifest['app3.js']["type"]);
-        assert.equals("<script src='CDNPath/js/app3-29b858db32acb754b5a863b899c58d4d.js'></script>", manifest['app3.js']["output"]);
-        assert.equals("js/app3-29b858db32acb754b5a863b899c58d4d.js", manifest['app3.js']["relativePath"]);
-        assert.equals("29b858db32acb754b5a863b899c58d4d", manifest['app3.js']["fingerprint"]);
-        assert.equals("<script src='CDNPath/js/app3-29b858db32acb754b5a863b899c58d4d_raw.js'></script>", manifest['app3.js']["outputRaw"]);
+        assert.equals("<script src='CDNPath/js/app3-cb248e942f61a08ff6f783b491bcfa4e.js'></script>", manifest['app3.js']["output"]);
+        assert.equals("js/app3-cb248e942f61a08ff6f783b491bcfa4e.js", manifest['app3.js']["relativePath"]);
+        assert.equals("cb248e942f61a08ff6f783b491bcfa4e", manifest['app3.js']["fingerprint"]);
+        assert.equals("<script src='CDNPath/js/app3-cb248e942f61a08ff6f783b491bcfa4e_raw.js'></script>", manifest['app3.js']["outputRaw"]);
         
         var cManifest = fs.readFileSync(path.join(tmpDir, "js", "clientManifest.js"), 'utf8');
         var context = {};

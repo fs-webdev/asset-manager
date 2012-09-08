@@ -9,7 +9,6 @@
     , "glob": "3.0.1"
     , "rimraf": "1.x"
     , "uglify-js": "1.2.x"
-    , "exists-patch": "0.0.0"
   },
   "devDependencies": {
     "buster": "0.6.x"
@@ -18,7 +17,7 @@
     "test": "buster test"
   },
   "main": "lib/asset-manager.js",
-  "engines": { "node": ">= 0.6.3" },
+  "engines": { "node": ">= 0.8.3" },
   "contributors": [
       "Tim Shadel <tim.shadel@familysearch.org>"
     , "Stephen Lynn <s.lynn@familysearch.org>"
