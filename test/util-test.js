@@ -44,6 +44,19 @@ buster.testCase("Utils tests", {
       refute.same(merged, this.obj2);
     }
   },
+  
+  "Test extractMediaMeta": {
+    "plain path": function() {
+      var meta = this.utils.extractMediaMeta("mypath");
+      assert.same("mypath", meta.path);
+      assert.same("screen", meta.mediaType);
+    },
+    "object": function() {
+      var meta = this.utils.extractMediaMeta({print:"mypath"});
+      assert.same("mypath", meta.path);
+      assert.same("print", meta.mediaType);
+    }
+  },
     
   "Test mkdirRecursiveSync": {
     setUp: function(){
@@ -58,7 +71,7 @@ buster.testCase("Utils tests", {
     "make a single folder": function() {
       var folder = this.baseFolder + "/test1";
       assert.same(true, this.utils.mkdirRecursiveSync(folder));
-      assert.same(true, path.existsSync(folder));
+      assert.same(true, fs.existsSync(folder));
       
       fs.rmdirSync(folder);
     },
@@ -66,7 +79,7 @@ buster.testCase("Utils tests", {
     "make a nested folder": function() {
       var folder = this.baseFolder + "/more/test1";
       assert.same(true, this.utils.mkdirRecursiveSync(folder));
-      assert.same(true, path.existsSync(folder));
+      assert.same(true, fs.existsSync(folder));
       
       fs.rmdirSync(folder);
       fs.rmdirSync(this.baseFolder + "/more");
@@ -96,11 +109,12 @@ buster.testCase("Utils tests", {
     "expand wildcard path": function(done){
       var basePaths = ['test/app*'];
       this.utils.expandPaths(basePaths, false, function(paths) {
-        assert.equals(paths.length, 4);
+        assert.equals(paths.length, 5);
         refute.equals(paths.indexOf("test/app1"), -1);
         refute.equals(paths.indexOf("test/app2"), -1);
         refute.equals(paths.indexOf("test/app3"), -1);
         refute.equals(paths.indexOf("test/app4"), -1);
+        refute.equals(paths.indexOf("test/app5"), -1);
         done();
       });
     },
