@@ -1,12 +1,12 @@
 {
   "name": "asset-manager",
   "description": "Asset manager built on top of connect-asset for managing multiple asset folders.",
-  "version": "0.3.3",
+  "version": "0.3.5",
   "author": "FamilySearch Web Developers",
   "repository": {"type": "git", "url": "git://github.com/fs-webdev/asset-manager.git"},
   "dependencies": {
       "async": "0.1.x"
-    , "glob": "3.0.1"
+    , "glob": "3.1.12"
     , "rimraf": "1.x"
     , "uglify-js": "1.2.x"
     , "less": "1.3.x"

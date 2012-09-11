@@ -44,6 +44,23 @@ buster.testCase("Utils tests", {
       refute.same(merged, this.obj2);
     }
   },
+
+  "Test filterAssembliesFiles": {
+    "simple set": function() {
+      var allFiles = ['file1.txt', 'file2.txt', 'module/file3.txt', 'module/file4.txt'],
+          assemblyFolders = ['module'],
+          filtered = this.utils.filterAssembliesFiles(allFiles, assemblyFolders);
+      
+      assert.same(3, filtered.length);
+    },
+    "name overlap": function() {
+      var allFiles = ['longFileName.txt', 'file2.txt', 'longFile/file3.txt', 'longFile/file4.txt'],
+          assemblyFolders = ['longFile'],
+          filtered = this.utils.filterAssembliesFiles(allFiles, assemblyFolders);
+      
+      assert.same(3, filtered.length);
+    }
+  },
   
   "Test extractMediaMeta": {
     "plain path": function() {
