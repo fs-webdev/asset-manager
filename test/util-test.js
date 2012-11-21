@@ -61,6 +61,22 @@ buster.testCase("Utils tests", {
       assert.same(3, filtered.length);
     }
   },
+
+  "Test findModuleCSSFiles": {
+    "simple set": function() {
+      var allFiles = ['test/app1/js/fullModule', 'test/app3/js/fullModuleWithCSS'],
+          cssFiles = this.utils.findModuleCSSFiles(allFiles);
+      
+      assert.equals(1, cssFiles.length);
+      assert.same("test/app3/css/fullModuleWithCSS.css", cssFiles[0]);
+    },
+    "empty set": function() {
+      var allFiles = ['test/app1/js/fullModule'],
+          cssFiles = this.utils.findModuleCSSFiles(allFiles);
+      
+      assert.equals(0, cssFiles.length);
+    }
+  },
   
   "Test extractMediaMeta": {
     "plain path": function() {
