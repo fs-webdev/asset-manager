@@ -242,7 +242,7 @@ buster.testCase("Asset Manager", {
         gzip: false
       }, function(){
         var filePath = path.join(tmpDir, "css", "appWithUrl-29a0e3235c7fab693ba90703c06bfe7d.css");
-        assert.equals(true, path.existsSync(filePath));
+        assert.equals(true, fs.existsSync(filePath));
         var contents = fs.readFileSync(filePath, 'UTF-8');
         refute.equals(-1, contents.indexOf('CDNPath/img/arrow2-dd0ecf27272f0daade43058090491241.png'));
         refute.equals(-1, contents.indexOf("url('missingImage.png')"));
