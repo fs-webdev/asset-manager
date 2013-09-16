@@ -54,12 +54,12 @@ describe("Utils tests", function(){
       
       assert.equal(3, filtered.length);
     });
-    it("allow css and img folders in module folder", function() {
-      var allFiles = ['module/file3.js', 'module/file4.json', 'module/css/other.css', 'module/img/image.gif'],
+    it("allow css, img, and html folders in module folder", function() {
+      var allFiles = ['module/file3.js', 'module/file4.json', 'module/css/other.css', 'module/img/image.gif', 'module/html/snippet.html'],
           assemblyFolders = ['module'],
           filtered = this.utils.filterAssembliesFiles(allFiles, assemblyFolders);
       
-      assert.equal(3, filtered.length);
+      assert.equal(4, filtered.length);
     });
     it("name overlap", function() {
       var allFiles = ['longFileName.txt', 'file2.txt', 'longFile/file3.txt', 'longFile/file4.txt'],
@@ -157,14 +157,14 @@ describe("Utils tests", function(){
   describe("getListOfAllFiles", function() {
     it("should find all assets in path", function(done) {
       this.utils.getListOfAllFiles(["test/app3"])(function(err, files) {
-        expect(files).to.have.length(17);
+        expect(files).to.have.length(24);
         done();
       });
     });
 
     it("should find all assets in multiple paths", function(done) {
       this.utils.getListOfAllFiles(["test/app3", "test/app1"])(function(err, files) {
-        expect(files).to.have.length(30);
+        expect(files).to.have.length(37);
         done();
       });
     });
@@ -173,15 +173,16 @@ describe("Utils tests", function(){
   describe("getListOfFoldersWithAssemblyFiles", function() {
     it("should find folders with assembly.json files", function(done) {
       this.utils.getListOfFoldersWithAssemblyFiles(["test/app3"])(function(err, files) {
-        expect(files).to.have.length(1);
-        expect(files[0]).to.equal("test/app3/js/fullModuleWithCSS");
+        expect(files).to.have.length(2);
+        expect(files[0]).to.equal("test/app3/js/angular/MyApp");
+        expect(files[1]).to.equal("test/app3/js/fullModuleWithCSS");
         done();
       });
     });
 
     it("should find folders with assembly.json files with more than one source path", function(done) {
       this.utils.getListOfFoldersWithAssemblyFiles(["test/app3", "test/app1"])(function(err, files) {
-        expect(files).to.have.length(2);
+        expect(files).to.have.length(3);
         done();
       });
     });
@@ -257,7 +258,14 @@ describe("Utils tests", function(){
       var compressed = this.utils.compressJS(jsString);
     
       assert.equal(typeof(compressed), "string");
-      assert.equal("var j=1", compressed);
+      assert.equal(compressed, "var j=1");
+    });
+    it("Compressing a typical JS string without variable mangling", function(){
+      var jsString = "function test(longvarname) { return longvarname + 1; }";
+      var compressed = this.utils.compressJS(jsString, true);
+
+      assert.equal(typeof(compressed), "string");
+      assert.equal(compressed, "function test(longvarname){return longvarname+1}");
     });
   });
 

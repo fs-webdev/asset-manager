@@ -9,8 +9,9 @@ describe("Asset Manager", function() {
   before(function(done){
     this.am = require('../lib/asset-manager');
     this.tmpDir = 'tmp';
+    rimraf.sync(this.tmpDir);
     fs.mkdirSync(this.tmpDir, 0755);
-    
+
     rimraf('builtAssets', function(){
       done();
     });
@@ -41,6 +42,7 @@ describe("Asset Manager", function() {
         assert.isFunction(this.context.css);
         assert.isFunction(this.context.js);
         assert.isFunction(this.context.img);
+        assert.isFunction(this.context.html);
       });
       
       it("check js resolution", function(){
@@ -70,31 +72,47 @@ describe("Asset Manager", function() {
       });
 
       it("should resolve css found in module folders", function() {
-        expect(this.context.img("/other.css")).to.equal("<link href='/css/other.css' rel='stylesheet' media='screen'>");
+        expect(this.context.css("/other.css")).to.equal("<link href='/css/other.css' rel='stylesheet' media='screen'>");
       });
-      
+
+      it("check html resolution", function(){
+        expect(this.context.html("base-template.html")).to.equal("/html/base-template.html");
+        expect(this.context.html("/base-template.html")).to.equal("/html/base-template.html");
+      });
+
+      it("should resolve html found in module folders", function() {
+        expect(this.context.html("/static.html")).to.equal("/html/static.html");
+        expect(this.context.html("/template1.html")).to.equal("/html/template1.html");
+        expect(this.context.html("/template2.html")).to.equal("/html/template2.html");
+      });
+
       it("absolute paths", function() {
         assert.equal("<script src='http://path.com/me.js'></script>", this.context.js("http://path.com/me.js"));
         assert.equal("<link href='http://path.com/me.css' rel='stylesheet' media='screen'>", this.context.css("http://path.com/me.css"));
         assert.equal("http://path.com/me.png", this.context.img("http://path.com/me.png"));
-        
+        assert.equal("http://path.com/me.html", this.context.img("http://path.com/me.html"));
+
         assert.equal("<script src='https://path.com/me.js'></script>", this.context.js("https://path.com/me.js"));
         assert.equal("<link href='https://path.com/me.css' rel='stylesheet' media='screen'>", this.context.css("https://path.com/me.css"));
         assert.equal("https://path.com/me.png", this.context.img("https://path.com/me.png"));
-        
+        assert.equal("https://path.com/me.html", this.context.img("https://path.com/me.html"));
+
         assert.equal("<script src='http://path.com/me.js?query#hash'></script>", this.context.js("http://path.com/me.js?query#hash"));
         assert.equal("<link href='http://path.com/me.css?query#hash' rel='stylesheet' media='screen'>", this.context.css("http://path.com/me.css?query#hash"));
         assert.equal("http://path.com/me.png?query#hash", this.context.img("http://path.com/me.png?query#hash"));
+        assert.equal("http://path.com/me.html?query#hash", this.context.img("http://path.com/me.html?query#hash"));
       });
       
       it("unresolved relative paths", function() {
         assert.equal("<script src='unresolvedPath.js'></script>", this.context.js("unresolvedPath.js"));
         assert.equal("<link href='unresolvedPath.css' rel='stylesheet' media='screen'>", this.context.css("unresolvedPath.css"));
         assert.equal("unresolvedPath.png", this.context.img("unresolvedPath.png"));
-        
+        assert.equal("unresolvedPath.html", this.context.img("unresolvedPath.html"));
+
         assert.equal("<script src='unresolvedPath.js?query#hash'></script>", this.context.js("unresolvedPath.js?query#hash"));
         assert.equal("<link href='unresolvedPath.css?query#hash' rel='stylesheet' media='screen'>", this.context.css("unresolvedPath.css?query#hash"));
         assert.equal("unresolvedPath.png?query#hash", this.context.img("unresolvedPath.png?query#hash"));
+        assert.equal("unresolvedPath.html?query#hash", this.context.img("unresolvedPath.html?query#hash"));
       });
     });
 
@@ -129,6 +147,7 @@ describe("Asset Manager", function() {
         assert.isFunction(this.context.css);
         assert.isFunction(this.context.js);
         assert.isFunction(this.context.img);
+        assert.isFunction(this.context.html);
       });
       
       it("check css resolution", function(){
@@ -153,6 +172,7 @@ describe("Asset Manager", function() {
         assert.isFunction(this.context.css);
         assert.isFunction(this.context.js);
         assert.isFunction(this.context.img);
+        assert.isFunction(this.context.html);
       });
       
       it("check js resolution", function(){
@@ -180,7 +200,13 @@ describe("Asset Manager", function() {
       it("css should resolve in module folder", function(){
         expect(this.context.css("other.css")).to.equal("<link href='/css/other-fcdce6b6d6e2175f6406869882f6f1ce.css' rel='stylesheet' media='screen'>");
       });
-      
+
+      it("check Angular resolution", function(){
+        expect(this.context.js("angular/MyApp.js")).to.equal("<script src='/js/angular/MyApp-e7cf12e655c36919c4ff1d998e8c3f35.js'></script>");
+        expect(this.context.html("template1.html")).to.equal("/html/template1-932e5a2fd42307d0daab17b456817ea0.html");
+        expect(this.context.html("template2.html")).to.equal("/html/template2-8721335f90ef32d088028509bb92e344.html");
+      });
+
       it("check font resolution", function(){
         assert.equal("/img/webfonts/League_Gothic-webfont-036cfa9c2ade08c1a4ee234526201dc8.eot", this.context.img("webfonts/League_Gothic-webfont.eot"));
         assert.equal("/img/webfonts/League_Gothic-webfont-036cfa9c2ade08c1a4ee234526201dc8.eot?#iefix", this.context.img("webfonts/League_Gothic-webfont.eot?#iefix"));
@@ -191,24 +217,29 @@ describe("Asset Manager", function() {
         assert.equal("<script src='http://path.com/me.js'></script>", this.context.js("http://path.com/me.js"));
         assert.equal("<link href='http://path.com/me.css' rel='stylesheet' media='screen'>", this.context.css("http://path.com/me.css"));
         assert.equal("http://path.com/me.png", this.context.img("http://path.com/me.png"));
-        
+        assert.equal("http://path.com/me.html", this.context.img("http://path.com/me.html"));
+
         assert.equal("<script src='https://path.com/me.js'></script>", this.context.js("https://path.com/me.js"));
         assert.equal("<link href='https://path.com/me.css' rel='stylesheet' media='screen'>", this.context.css("https://path.com/me.css"));
         assert.equal("https://path.com/me.png", this.context.img("https://path.com/me.png"));
-        
+        assert.equal("https://path.com/me.html", this.context.img("https://path.com/me.html"));
+
         assert.equal("<script src='http://path.com/me.js?query#hash'></script>", this.context.js("http://path.com/me.js?query#hash"));
         assert.equal("<link href='http://path.com/me.css?query#hash' rel='stylesheet' media='screen'>", this.context.css("http://path.com/me.css?query#hash"));
         assert.equal("http://path.com/me.png?query#hash", this.context.img("http://path.com/me.png?query#hash"));
+        assert.equal("http://path.com/me.html?query#hash", this.context.img("http://path.com/me.html?query#hash"));
       });
       
       it("unresolved relative paths", function() {
         assert.equal("<script src='unresolvedPath.js'></script>", this.context.js("unresolvedPath.js"));
         assert.equal("<link href='unresolvedPath.css' rel='stylesheet' media='screen'>", this.context.css("unresolvedPath.css"));
         assert.equal("unresolvedPath.png", this.context.img("unresolvedPath.png"));
-        
+        assert.equal("unresolvedPath.html", this.context.img("unresolvedPath.html"));
+
         assert.equal("<script src='unresolvedPath.js?query#hash'></script>", this.context.js("unresolvedPath.js?query#hash"));
         assert.equal("<link href='unresolvedPath.css?query#hash' rel='stylesheet' media='screen'>", this.context.css("unresolvedPath.css?query#hash"));
         assert.equal("unresolvedPath.png?query#hash", this.context.img("unresolvedPath.png?query#hash"));
+        assert.equal("unresolvedPath.html?query#hash", this.context.img("unresolvedPath.html?query#hash"));
       });
     });
   });
@@ -223,20 +254,23 @@ describe("Asset Manager", function() {
         builtAssets: tmpDir,
         gzip: true
       }, function(){
-        assert.equal(true, fs.existsSync(path.join(tmpDir, "js", "app3-cb248e942f61a08ff6f783b491bcfa4e.js")));
-        assert.equal(true, fs.existsSync(path.join(tmpDir, "js", "app3-cb248e942f61a08ff6f783b491bcfa4e_raw.js")));
+        assert.equal(true, fs.existsSync(path.join(tmpDir, "js", "app3-cb248e942f61a08ff6f783b491bcfa4e.js")), "app3 js file doesn't exist");
+        assert.equal(true, fs.existsSync(path.join(tmpDir, "js", "app3-cb248e942f61a08ff6f783b491bcfa4e_raw.js")), "app3 raw js file doesn't exist");
         
 //        assert.equal(true, path.existsSync(path.join(tmpDir, "js", "clientManifest-ca5016aac45f6f73adbfa17b6865f839.js")));
 //        assert.equal(true, path.existsSync(path.join(tmpDir, "js", "clientManifest-ca5016aac45f6f73adbfa17b6865f839_raw.js")));
-        
+
         assert.equal(true, fs.existsSync(path.join(tmpDir, "manifest.json")));
-        
+
         assert.equal(true, fs.existsSync(path.join(tmpDir, "css", "app3-fcdce6b6d6e2175f6406869882f6f1ce.css")));
         assert.equal(true, fs.existsSync(path.join(tmpDir, "css", "fullModuleWithCSS-fcdce6b6d6e2175f6406869882f6f1ce.css")));
-        expect(fs.existsSync(path.join(tmpDir, "css", "other-fcdce6b6d6e2175f6406869882f6f1ce.css"))).to.equal(true);
-        assert.equal(true, fs.existsSync(path.join(tmpDir, "img", "arrow3-dd0ecf27272f0daade43058090491241.png")));
+        expect(fs.existsSync(path.join(tmpDir, "css", "other-fcdce6b6d6e2175f6406869882f6f1ce.css"))).to.equal(true, "other css not found");
+        assert.equal(true, fs.existsSync(path.join(tmpDir, "img", "arrow3-dd0ecf27272f0daade43058090491241.png")), "arrow3 not found");
+        assert.equal(true, fs.existsSync(path.join(tmpDir, "html", "static-9e64efd9dd2d31c924c74f0bb672d6cb.html")), "static.html not found");
+        assert.equal(true, fs.existsSync(path.join(tmpDir, "html", "template1-932e5a2fd42307d0daab17b456817ea0.html")), "template1.html not found");
+        assert.equal(true, fs.existsSync(path.join(tmpDir, "html", "template2-8721335f90ef32d088028509bb92e344.html")), "template2.html not found");
         expect(fs.existsSync(path.join(tmpDir, "img", "arrowInModule-dd0ecf27272f0daade43058090491241.png"))).to.equal(true);
-        
+
         var manifest = fs.readFileSync(path.join(tmpDir, "manifest.json"), 'utf8');
         manifest = JSON.parse(manifest);
         
