@@ -1,0 +1,7 @@
+{
+	"files": [
+		"main.js"
+	],
+	"prefix": "(function(window,$,undefined){",
+	"suffix": "}(this,jQuery));"
+}

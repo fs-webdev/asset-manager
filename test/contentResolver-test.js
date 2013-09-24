@@ -97,4 +97,20 @@ describe("contentResolver tests", function(){
       assert.equal("//Module assembly: testModule\n\n/*\n * Included File: main.js\n */\n\nvar m=\"main.js\";\n\n/*\n * Included File: shared-ui-assets.js\n */\n\nvar suia=\"suia.js\";\n\n/*\n * Included File: shared-ui-vendors.js\n */\n\nvar suiv=\"suiv.js\";\n\n", js.getContent());
     });
   });
+
+  describe("Test wrapping js files per assembly.json settings", function() {
+    beforeEach(function() {
+      this.cf = this.cr(['test/app1'], null, false);
+    });
+
+    it("for simpleWrap", function() {
+      var js = this.cf("", "wrapModule", "js", "js");
+      assert.equal(js.getContent(), "//Module assembly: wrapModule\n\n(function(window,undefined){\n\n/*\n * Included File: main.js\n */\n\nalert('test');\n\n}(this));");
+    });
+
+    it("for complex wrap", function() {
+      var js = this.cf("", "complexWrapModule", "js", "js");
+      assert.equal(js.getContent(), "//Module assembly: complexWrapModule\n\n(function(window,$,undefined){\n\n/*\n * Included File: main.js\n */\n\nalert('test');\n\n}(this,jQuery));");
+    });
+  });
 });
