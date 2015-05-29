@@ -86,43 +86,43 @@ describe("Asset Manager", function() {
       });
 
       it("check html resolution", function(){
-        expect(this.context.html("base-template.html")).to.equal("/html/base-template.html");
-        expect(this.context.html("/base-template.html")).to.equal("/html/base-template.html");
+        expect(this.context.html("base-template.html")).to.equal("<link rel='import' href='/html/base-template.html'>");
+        expect(this.context.html("/base-template.html")).to.equal("<link rel='import' href='/html/base-template.html'>");
       });
 
       it("should resolve html found in module folders", function() {
-        expect(this.context.html("/static.html")).to.equal("/html/static.html");
-        expect(this.context.html("/template1.html")).to.equal("/html/template1.html");
-        expect(this.context.html("/template2.html")).to.equal("/html/template2.html");
+        expect(this.context.html("/static.html")).to.equal("<link rel='import' href='/html/static.html'>");
+        expect(this.context.html("/template1.html")).to.equal("<link rel='import' href='/html/template1.html'>");
+        expect(this.context.html("/template2.html")).to.equal("<link rel='import' href='/html/template2.html'>");
       });
 
       it("absolute paths", function() {
         assert.equal("<script src='http://path.com/me.js' ></script>", this.context.js("http://path.com/me.js"));
         assert.equal("<link href='http://path.com/me.css' rel='stylesheet' media='screen'/>", this.context.css("http://path.com/me.css"));
         assert.equal("http://path.com/me.png", this.context.img("http://path.com/me.png"));
-        assert.equal("http://path.com/me.html", this.context.img("http://path.com/me.html"));
+        assert.equal("<link rel='import' href='http://path.com/me.html'>", this.context.html("http://path.com/me.html"));
 
         assert.equal("<script src='https://path.com/me.js' ></script>", this.context.js("https://path.com/me.js"));
         assert.equal("<link href='https://path.com/me.css' rel='stylesheet' media='screen'/>", this.context.css("https://path.com/me.css"));
         assert.equal("https://path.com/me.png", this.context.img("https://path.com/me.png"));
-        assert.equal("https://path.com/me.html", this.context.img("https://path.com/me.html"));
+        assert.equal("<link rel='import' href='https://path.com/me.html'>", this.context.html("https://path.com/me.html"));
 
         assert.equal("<script src='http://path.com/me.js?query#hash' ></script>", this.context.js("http://path.com/me.js?query#hash"));
         assert.equal("<link href='http://path.com/me.css?query#hash' rel='stylesheet' media='screen'/>", this.context.css("http://path.com/me.css?query#hash"));
         assert.equal("http://path.com/me.png?query#hash", this.context.img("http://path.com/me.png?query#hash"));
-        assert.equal("http://path.com/me.html?query#hash", this.context.img("http://path.com/me.html?query#hash"));
+        assert.equal("<link rel='import' href='http://path.com/me.html?query#hash'>", this.context.html("http://path.com/me.html?query#hash"));
       });
 
       it("unresolved relative paths", function() {
         assert.equal("<script src='unresolvedPath.js' ></script>", this.context.js("unresolvedPath.js"));
         assert.equal("<link href='unresolvedPath.css' rel='stylesheet' media='screen'/>", this.context.css("unresolvedPath.css"));
         assert.equal("unresolvedPath.png", this.context.img("unresolvedPath.png"));
-        assert.equal("unresolvedPath.html", this.context.img("unresolvedPath.html"));
+        assert.equal("<link rel='import' href='unresolvedPath.html'>", this.context.html("unresolvedPath.html"));
 
         assert.equal("<script src='unresolvedPath.js?query#hash' ></script>", this.context.js("unresolvedPath.js?query#hash"));
         assert.equal("<link href='unresolvedPath.css?query#hash' rel='stylesheet' media='screen'/>", this.context.css("unresolvedPath.css?query#hash"));
         assert.equal("unresolvedPath.png?query#hash", this.context.img("unresolvedPath.png?query#hash"));
-        assert.equal("unresolvedPath.html?query#hash", this.context.img("unresolvedPath.html?query#hash"));
+        assert.equal("<link rel='import' href='unresolvedPath.html?query#hash'>", this.context.html("unresolvedPath.html?query#hash"));
       });
     });
 
@@ -213,8 +213,8 @@ describe("Asset Manager", function() {
 
       it("check Angular resolution", function(){
         expect(this.context.js("angular/MyApp.js")).to.equal("<script src='/js/angular/MyApp-0706901f2d108d3eb07f6b92a1f1e7f6.js' ></script>");
-        expect(this.context.html("template1.html")).to.equal("/html/template1-932e5a2fd42307d0daab17b456817ea0.html");
-        expect(this.context.html("template2.html")).to.equal("/html/template2-8721335f90ef32d088028509bb92e344.html");
+        expect(this.context.html("template1.html")).to.equal("<link rel='import' href='/html/template1-932e5a2fd42307d0daab17b456817ea0.html'>");
+        expect(this.context.html("template2.html")).to.equal("<link rel='import' href='/html/template2-8721335f90ef32d088028509bb92e344.html'>");
       });
 
       it("check font resolution", function(){
@@ -227,29 +227,29 @@ describe("Asset Manager", function() {
         assert.equal("<script src='http://path.com/me.js' ></script>", this.context.js("http://path.com/me.js"));
         assert.equal("<link href='http://path.com/me.css' rel='stylesheet' media='screen'/>", this.context.css("http://path.com/me.css"));
         assert.equal("http://path.com/me.png", this.context.img("http://path.com/me.png"));
-        assert.equal("http://path.com/me.html", this.context.img("http://path.com/me.html"));
+        assert.equal("<link rel='import' href='http://path.com/me.html'>", this.context.html("http://path.com/me.html"));
 
         assert.equal("<script src='https://path.com/me.js' ></script>", this.context.js("https://path.com/me.js"));
         assert.equal("<link href='https://path.com/me.css' rel='stylesheet' media='screen'/>", this.context.css("https://path.com/me.css"));
         assert.equal("https://path.com/me.png", this.context.img("https://path.com/me.png"));
-        assert.equal("https://path.com/me.html", this.context.img("https://path.com/me.html"));
+        assert.equal("<link rel='import' href='https://path.com/me.html'>", this.context.html("https://path.com/me.html"));
 
         assert.equal("<script src='http://path.com/me.js?query#hash' ></script>", this.context.js("http://path.com/me.js?query#hash"));
         assert.equal("<link href='http://path.com/me.css?query#hash' rel='stylesheet' media='screen'/>", this.context.css("http://path.com/me.css?query#hash"));
         assert.equal("http://path.com/me.png?query#hash", this.context.img("http://path.com/me.png?query#hash"));
-        assert.equal("http://path.com/me.html?query#hash", this.context.img("http://path.com/me.html?query#hash"));
+        assert.equal("<link rel='import' href='http://path.com/me.html?query#hash'>", this.context.html("http://path.com/me.html?query#hash"));
       });
 
       it("unresolved relative paths", function() {
         assert.equal("<script src='unresolvedPath.js' ></script>", this.context.js("unresolvedPath.js"));
         assert.equal("<link href='unresolvedPath.css' rel='stylesheet' media='screen'/>", this.context.css("unresolvedPath.css"));
         assert.equal("unresolvedPath.png", this.context.img("unresolvedPath.png"));
-        assert.equal("unresolvedPath.html", this.context.img("unresolvedPath.html"));
+        assert.equal("<link rel='import' href='unresolvedPath.html'>", this.context.html("unresolvedPath.html"));
 
         assert.equal("<script src='unresolvedPath.js?query#hash' ></script>", this.context.js("unresolvedPath.js?query#hash"));
         assert.equal("<link href='unresolvedPath.css?query#hash' rel='stylesheet' media='screen'/>", this.context.css("unresolvedPath.css?query#hash"));
         assert.equal("unresolvedPath.png?query#hash", this.context.img("unresolvedPath.png?query#hash"));
-        assert.equal("unresolvedPath.html?query#hash", this.context.img("unresolvedPath.html?query#hash"));
+        assert.equal("<link rel='import' href='unresolvedPath.html?query#hash'>", this.context.html("unresolvedPath.html?query#hash"));
       });
     });
   });
