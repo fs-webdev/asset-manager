@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "async": "0.1.x",
-    "clean-css": "^3.3.3",
+    "clean-css": "3.3.3",
     "coffee-script": "1.4.x",
     "debug": "~0.7.2",
     "glob": "3.1.12",
