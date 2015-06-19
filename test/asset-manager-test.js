@@ -190,9 +190,9 @@ describe("Asset Manager", function() {
       });
 
       it("check css resolution", function(){
-        assert.equal("<link href='/css/app3-fcdce6b6d6e2175f6406869882f6f1ce.css' rel='stylesheet' media='screen'/>", this.context.css("app3.css"));
-        assert.equal("<link href='/css/fullModuleWithCSS-fcdce6b6d6e2175f6406869882f6f1ce.css' rel='stylesheet' media='screen'/>", this.context.css('fullModuleWithCSS.css'));
-        assert.equal("<link href='/css/app3-fcdce6b6d6e2175f6406869882f6f1ce.css' rel='stylesheet' media='print'/>", this.context.css({print : 'app3.css'}));
+        assert.equal("<link href='/css/app3-d41d8cd98f00b204e9800998ecf8427e.css' rel='stylesheet' media='screen'/>", this.context.css("app3.css"));
+        assert.equal("<link href='/css/fullModuleWithCSS-d41d8cd98f00b204e9800998ecf8427e.css' rel='stylesheet' media='screen'/>", this.context.css('fullModuleWithCSS.css'));
+        assert.equal("<link href='/css/app3-d41d8cd98f00b204e9800998ecf8427e.css' rel='stylesheet' media='print'/>", this.context.css({print : 'app3.css'}));
       });
 
       it("check less resolution", function(){
