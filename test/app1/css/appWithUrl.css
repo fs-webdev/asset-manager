@@ -1,8 +1,8 @@
 body { 
-  url('arrow2.png'); 
+  background-image: url('arrow2.png'); 
 }
 a { 
-  url('missingImage.png'); 
+  background-image: url('missingImage.png'); 
 }
 body {
   display: block;

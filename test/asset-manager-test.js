@@ -169,7 +169,7 @@ describe("Asset Manager", function() {
     describe("in production mode", function(){
       before(function(done) {
         this.am.start({
-          paths: ['test/app3', 'test/app5'],
+          paths: ['test/app1', 'test/app3', 'test/app5'],
           context: this.context,
           inProd: true,
           servePath: ""
@@ -191,8 +191,7 @@ describe("Asset Manager", function() {
 
       it("check css resolution", function(){
         assert.equal("<link href='/css/app3-7e25b99a0175c146b03be142e13296c3.css' rel='stylesheet' media='screen'/>", this.context.css("app3.css"));
-        console.log('this.context.css("appWithUrl.css")', this.context.css('appWithUrl.css'));
-        assert.equal("<link href='/css/appWithUrl-7e25b99a0175c146b03be142e13296c3.css' rel='stylesheet' media='screen'/>", this.context.css('appWithUrl.css'));
+        assert.equal("<link href='/css/appWithUrl-606620420b2ce35f2a5ef0717fba48da.css' rel='stylesheet' media='screen'/>", this.context.css('appWithUrl.css'));
         assert.equal("<link href='/css/fullModuleWithCSS-7e25b99a0175c146b03be142e13296c3.css' rel='stylesheet' media='screen'/>", this.context.css('fullModuleWithCSS.css'));
         assert.equal("<link href='/css/app3-7e25b99a0175c146b03be142e13296c3.css' rel='stylesheet' media='print'/>", this.context.css({print : 'app3.css'}));
       });
@@ -324,14 +323,11 @@ describe("Asset Manager", function() {
         builtAssets: tmpDir,
         gzip: false
       }, function(){
-        var filePath = path.join(tmpDir, "css", "appWithUrl-ac6d13034190603411e29408237a88a9");
-        console.log('filePath', filePath);
-        console.log('fs.existsSync(filePath)', fs.existsSync(filePath));
+        var filePath = path.join(tmpDir, "css", "appWithUrl-ed54d76594c3d7b4f4882233ceee042b.css");
         assert.equal(true, fs.existsSync(filePath));
         var contents = fs.readFileSync(filePath, 'UTF-8');
-        console.log('contents', contents);
         assert.notEqual(-1, contents.indexOf('CDNPath/img/arrow2-dd0ecf27272f0daade43058090491241.png'));
-        assert.notEqual(-1, contents.indexOf("url('missingImage.png')"));
+        assert.notEqual(-1, contents.indexOf('url(missingImage.png)'));
 
         done();
       });

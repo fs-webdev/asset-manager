@@ -268,6 +268,35 @@ describe("Utils tests", function(){
       assert.equal(compressed, "function test(longvarname){return longvarname+1}");
     });
   });
+  
+  describe("Test compressCSS", function(){
+    it("Compressing a typical CSS string", function(){
+      var cssString = "body { "+
+      "  background-image: url('arrow2.png'); "+
+      "}"+
+      "a { "+
+      "  background-image: url('missingImage.png'); "+
+      "}"+
+      "body {"+
+      "  display: block;"+
+      "  color: black;"+
+      "}"+
+      "div {"+
+      "  float: left;"+
+      "  position: absolute;"+
+      "  top: -99px;"+
+      "}"+
+      "article {"+
+      "  display: inline-block;"+
+      "  color: #333;"+
+      "  z-index: 100;"+
+      "}";
+      var compressed = this.utils.compressCSS(cssString);
+
+      assert.equal(typeof(compressed), "string");
+      assert.equal(compressed, "body{background-image:url(arrow2.png);display:block;color:#000}a{background-image:url(missingImage.png)}div{float:left;position:absolute;top:-99px}article{display:inline-block;color:#333;z-index:100}");
+    });
+  });
 
   describe("Test gzipFile", function(){
     it("gzip a JS file", function(done){

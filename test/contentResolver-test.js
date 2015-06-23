@@ -66,6 +66,13 @@ describe("contentResolver tests", function(){
       expect(js.getContent('utf8')).to.equal("alert(\"hello\")");
       expect(js.getContentRaw('utf8')).to.equal("alert( 'hello' );");
     });
+    
+    it("for a css file", function() {
+      var css = this.cf("", "app1", "css", "css");
+      expect(css.getDiskPath()).to.equal(path.resolve("test/app1/css/app1.css"));
+      expect(css.getContent('utf8')).to.equal("body{display:block;color:#000}");
+      expect(css.getContentRaw('utf8')).to.equal("body{ display: block; color: black; }");
+    });
   });
 
   describe("Test assembled module resolution with NO compression", function() {
