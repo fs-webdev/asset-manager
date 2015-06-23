@@ -22,7 +22,7 @@ describe("contentResolver tests", function(){
     it("for a css file", function() {
       var css = this.cf("", "app1", "css", "css");
       assert.equal(path.resolve("test/app1/css/app1.css"), css.getDiskPath());
-      assert.equal("body {}", css.getContent());
+      assert.equal("body{ display: block; color: black; }", css.getContentRaw());
     });
 
     it("for a img file", function() {
