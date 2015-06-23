@@ -197,7 +197,7 @@ describe("Asset Manager", function() {
       });
 
       it("check less resolution", function(){
-        assert.equal("<link href='/css/lessTest-0a8b81b842d4f8cdd4115f4379411b5f.less.css' rel='stylesheet' media='screen'/>", this.context.css("lessTest.less"));
+        assert.equal("<link href='/css/lessTest-72cf514b0dd7fbd13b04d7b47bd2f516.less.css' rel='stylesheet' media='screen'/>", this.context.css("lessTest.less"));
       });
 
       it("check img resolution", function(){
