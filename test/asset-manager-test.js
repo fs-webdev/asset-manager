@@ -190,14 +190,14 @@ describe("Asset Manager", function() {
       });
 
       it("check css resolution", function(){
-        assert.equal("<link href='/css/app3-7e25b99a0175c146b03be142e13296c3.css' rel='stylesheet' media='screen'/>", this.context.css("app3.css"));
-        assert.equal("<link href='/css/appWithUrl-606620420b2ce35f2a5ef0717fba48da.css' rel='stylesheet' media='screen'/>", this.context.css('appWithUrl.css'));
-        assert.equal("<link href='/css/fullModuleWithCSS-7e25b99a0175c146b03be142e13296c3.css' rel='stylesheet' media='screen'/>", this.context.css('fullModuleWithCSS.css'));
-        assert.equal("<link href='/css/app3-7e25b99a0175c146b03be142e13296c3.css' rel='stylesheet' media='print'/>", this.context.css({print : 'app3.css'}));
+        assert.equal("<link href='/css/app3-70de7ebe8822eb1dd9507bcd772279f0.css' rel='stylesheet' media='screen'/>", this.context.css("app3.css"));
+        assert.equal("<link href='/css/appWithUrl-0dbad762b71cac35fc4891f376e300b3.css' rel='stylesheet' media='screen'/>", this.context.css('appWithUrl.css'));
+        assert.equal("<link href='/css/fullModuleWithCSS-70de7ebe8822eb1dd9507bcd772279f0.css' rel='stylesheet' media='screen'/>", this.context.css('fullModuleWithCSS.css'));
+        assert.equal("<link href='/css/app3-70de7ebe8822eb1dd9507bcd772279f0.css' rel='stylesheet' media='print'/>", this.context.css({print : 'app3.css'}));
       });
 
       it("check less resolution", function(){
-        assert.equal("<link href='/css/lessTest-61fb3c5c2185bae51f018cd084b7bb2b.less.css' rel='stylesheet' media='screen'/>", this.context.css("lessTest.less"));
+        assert.equal("<link href='/css/lessTest-0a8b81b842d4f8cdd4115f4379411b5f.less.css' rel='stylesheet' media='screen'/>", this.context.css("lessTest.less"));
       });
 
       it("check img resolution", function(){
@@ -209,7 +209,7 @@ describe("Asset Manager", function() {
       });
 
       it("css should resolve in module folder", function(){
-        expect(this.context.css("other.css")).to.equal("<link href='/css/other-7e25b99a0175c146b03be142e13296c3.css' rel='stylesheet' media='screen'/>");
+        expect(this.context.css("other.css")).to.equal("<link href='/css/other-70de7ebe8822eb1dd9507bcd772279f0.css' rel='stylesheet' media='screen'/>");
       });
 
       it("check Angular resolution", function(){
@@ -265,6 +265,8 @@ describe("Asset Manager", function() {
         builtAssets: tmpDir,
         gzip: true
       }, function(){
+        var files = fs.readdirSync(path.join(tmpDir, "css"));
+        console.log('xfiles',files);
         assert.equal(true, fs.existsSync(path.join(tmpDir, "js", "app3-cb248e942f61a08ff6f783b491bcfa4e.js")), "app3 js file doesn't exist");
         assert.equal(true, fs.existsSync(path.join(tmpDir, "js", "app3-cb248e942f61a08ff6f783b491bcfa4e_raw.js")), "app3 raw js file doesn't exist");
 
@@ -273,9 +275,9 @@ describe("Asset Manager", function() {
 
         assert.equal(true, fs.existsSync(path.join(tmpDir, "manifest.json")));
 
-        assert.equal(true, fs.existsSync(path.join(tmpDir, "css", "app3-7e25b99a0175c146b03be142e13296c3.css")));
-        assert.equal(true, fs.existsSync(path.join(tmpDir, "css", "fullModuleWithCSS-7e25b99a0175c146b03be142e13296c3.css")));
-        expect(fs.existsSync(path.join(tmpDir, "css", "other-7e25b99a0175c146b03be142e13296c3.css"))).to.equal(true, "other css not found");
+        assert.equal(true, fs.existsSync(path.join(tmpDir, "css", "app3-70de7ebe8822eb1dd9507bcd772279f0.css")));
+        assert.equal(true, fs.existsSync(path.join(tmpDir, "css", "fullModuleWithCSS-70de7ebe8822eb1dd9507bcd772279f0.css")));
+        expect(fs.existsSync(path.join(tmpDir, "css", "other-70de7ebe8822eb1dd9507bcd772279f0.css"))).to.equal(true, "other css not found");
         assert.equal(true, fs.existsSync(path.join(tmpDir, "img", "arrow3-dd0ecf27272f0daade43058090491241.png")), "arrow3 not found");
         assert.equal(true, fs.existsSync(path.join(tmpDir, "html", "static-9e64efd9dd2d31c924c74f0bb672d6cb.html")), "static.html not found");
         assert.equal(true, fs.existsSync(path.join(tmpDir, "html", "template1-932e5a2fd42307d0daab17b456817ea0.html")), "template1.html not found");
@@ -323,7 +325,9 @@ describe("Asset Manager", function() {
         builtAssets: tmpDir,
         gzip: false
       }, function(){
-        var filePath = path.join(tmpDir, "css", "appWithUrl-ed54d76594c3d7b4f4882233ceee042b.css");
+        // var files = fs.readdirSync(path.join(tmpDir, "css"));
+        // console.log('xfiles',files);
+        var filePath = path.join(tmpDir, "css", "appWithUrl-6b5082bbf335d5aa1a7cc7987848aa4b.css");
         assert.equal(true, fs.existsSync(filePath));
         var contents = fs.readFileSync(filePath, 'UTF-8');
         assert.notEqual(-1, contents.indexOf('CDNPath/img/arrow2-dd0ecf27272f0daade43058090491241.png'));

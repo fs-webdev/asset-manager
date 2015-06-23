@@ -1,10 +1,6 @@
 @import includeme
 
 body {
-  width: 500px;
-  h1 {
-    font-size: 11px;
-  }
   div {
     float: left;
     position: absolute;
@@ -17,5 +13,37 @@ body {
   }
 }
 
+/*2nd body*/
+body {
+  background-color: blue;
+}
 
+/*1st media query*/
+@media (min-width: 500px){
+  body {
+    background-color: purple;
+  }
+  article {
+    display: block;
+    float: right;
+  }
+}
+/*2nd matching media query*/
+@media (min-width: 500px){
+  /*2nd body inside same size media query*/
+  body {
+    font-size: 12px;
+  }
+  /*2nd article inside same size media query*/
+  article {
+    display: inline-block;
+    color: red;
+    float: none;
+  }
+}
 
+/* normal comment */
+/*!
+  Important comment included in minified output
+*/
+// other comment
