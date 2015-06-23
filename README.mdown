@@ -8,6 +8,9 @@ browser to dynamically load static assets (e.g., people using the Inject depende
 
 [![build status](https://secure.travis-ci.org/fs-webdev/asset-manager.png)](http://travis-ci.org/fs-webdev/asset-manager)
 
+## Node Versions Supported:
+0.10.x through 0.12.x
+
 ## How?
 
 First, install it in your project's directory:
