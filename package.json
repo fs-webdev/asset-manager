@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "chai": "1.6.x",
-    "gulp": "^3.9.0",
+    "gulp": "3.9.0",
     "mocha": "1.4.x",
     "sinon": "1.4.x"
   },
