@@ -190,14 +190,14 @@ describe("Asset Manager", function() {
       });
 
       it("check css resolution", function(){
-        assert.equal("<link href='/css/app3-70de7ebe8822eb1dd9507bcd772279f0.css' rel='stylesheet' media='screen'/>", this.context.css("app3.css"));
-        assert.equal("<link href='/css/appWithUrl-0dbad762b71cac35fc4891f376e300b3.css' rel='stylesheet' media='screen'/>", this.context.css('appWithUrl.css'));
-        assert.equal("<link href='/css/fullModuleWithCSS-70de7ebe8822eb1dd9507bcd772279f0.css' rel='stylesheet' media='screen'/>", this.context.css('fullModuleWithCSS.css'));
-        assert.equal("<link href='/css/app3-70de7ebe8822eb1dd9507bcd772279f0.css' rel='stylesheet' media='print'/>", this.context.css({print : 'app3.css'}));
+        assert.equal("<link href='/css/app3-e6c36427a5a3d44697c26ed1df3dd44c.css' rel='stylesheet' media='screen'/>", this.context.css("app3.css"));
+        assert.equal("<link href='/css/appWithUrl-2a43955240207f71d8dff237cfd37739.css' rel='stylesheet' media='screen'/>", this.context.css('appWithUrl.css'));
+        assert.equal("<link href='/css/fullModuleWithCSS-e6c36427a5a3d44697c26ed1df3dd44c.css' rel='stylesheet' media='screen'/>", this.context.css('fullModuleWithCSS.css'));
+        assert.equal("<link href='/css/app3-e6c36427a5a3d44697c26ed1df3dd44c.css' rel='stylesheet' media='print'/>", this.context.css({print : 'app3.css'}));
       });
 
       it("check less resolution", function(){
-        assert.equal("<link href='/css/lessTest-72cf514b0dd7fbd13b04d7b47bd2f516.less.css' rel='stylesheet' media='screen'/>", this.context.css("lessTest.less"));
+        assert.equal("<link href='/css/lessTest-70a4e6eca7c6d5a960a6bb48fab71776.less.css' rel='stylesheet' media='screen'/>", this.context.css("lessTest.less"));
       });
 
       it("check img resolution", function(){
@@ -205,11 +205,11 @@ describe("Asset Manager", function() {
       });
 
       it("image should resolve in module folder", function(){
-        expect(this.context.img("arrowInModule.png")).to.equal("/img/arrowInModule-dd0ecf27272f0daade43058090491241.png");
+        expect("/img/arrowInModule-dd0ecf27272f0daade43058090491241.png").to.equal(this.context.img("arrowInModule.png"));
       });
 
       it("css should resolve in module folder", function(){
-        expect(this.context.css("other.css")).to.equal("<link href='/css/other-70de7ebe8822eb1dd9507bcd772279f0.css' rel='stylesheet' media='screen'/>");
+        expect("<link href='/css/other-e6c36427a5a3d44697c26ed1df3dd44c.css' rel='stylesheet' media='screen'/>").to.equal(this.context.css("other.css"));
       });
 
       it("check Angular resolution", function(){
@@ -275,9 +275,9 @@ describe("Asset Manager", function() {
 
         assert.equal(true, fs.existsSync(path.join(tmpDir, "manifest.json")));
 
-        assert.equal(true, fs.existsSync(path.join(tmpDir, "css", "app3-70de7ebe8822eb1dd9507bcd772279f0.css")));
-        assert.equal(true, fs.existsSync(path.join(tmpDir, "css", "fullModuleWithCSS-70de7ebe8822eb1dd9507bcd772279f0.css")));
-        expect(fs.existsSync(path.join(tmpDir, "css", "other-70de7ebe8822eb1dd9507bcd772279f0.css"))).to.equal(true, "other css not found");
+        assert.equal(true, fs.existsSync(path.join(tmpDir, "css", "app3-e6c36427a5a3d44697c26ed1df3dd44c.css")));
+        assert.equal(true, fs.existsSync(path.join(tmpDir, "css", "fullModuleWithCSS-e6c36427a5a3d44697c26ed1df3dd44c.css")));
+        expect(fs.existsSync(path.join(tmpDir, "css", "other-e6c36427a5a3d44697c26ed1df3dd44c.css"))).to.equal(true, "other css not found");
         assert.equal(true, fs.existsSync(path.join(tmpDir, "img", "arrow3-dd0ecf27272f0daade43058090491241.png")), "arrow3 not found");
         assert.equal(true, fs.existsSync(path.join(tmpDir, "html", "static-9e64efd9dd2d31c924c74f0bb672d6cb.html")), "static.html not found");
         assert.equal(true, fs.existsSync(path.join(tmpDir, "html", "template1-932e5a2fd42307d0daab17b456817ea0.html")), "template1.html not found");
@@ -325,9 +325,9 @@ describe("Asset Manager", function() {
         builtAssets: tmpDir,
         gzip: false
       }, function(){
-        // var files = fs.readdirSync(path.join(tmpDir, "css"));
-        // console.log('xfiles',files);
-        var filePath = path.join(tmpDir, "css", "appWithUrl-6b5082bbf335d5aa1a7cc7987848aa4b.css");
+        var files = fs.readdirSync(path.join(tmpDir, "css"));
+        console.log('xfiles',files);
+        var filePath = path.join(tmpDir, "css", "appWithUrl-2859f22c22e7591972685dc60f53dbea.css");
         assert.equal(true, fs.existsSync(filePath));
         var contents = fs.readFileSync(filePath, 'UTF-8');
         assert.notEqual(-1, contents.indexOf('CDNPath/img/arrow2-dd0ecf27272f0daade43058090491241.png'));
