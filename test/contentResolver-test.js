@@ -69,6 +69,8 @@ describe("contentResolver tests", function(){
     
     it("for a css file", function() {
       var css = this.cf("", "app1", "css", "css");
+      console.log('css.getContent', css.getContent('utf8'));
+      console.log('css.getContentRaw', css.getContentRaw('utf8'));
       expect(css.getDiskPath()).to.equal(path.resolve("test/app1/css/app1.css"));
       expect(css.getContent('utf8')).to.equal("body{display:block;color:#000}");
       expect(css.getContentRaw('utf8')).to.equal("body{ display: block; color: black; }");

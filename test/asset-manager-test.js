@@ -179,6 +179,7 @@ describe("Asset Manager", function() {
       });
 
       it("check asset function existence", function(){
+        console.log('am this:', this);
         assert.isFunction(this.context.css);
         assert.isFunction(this.context.js);
         assert.isFunction(this.context.img);
@@ -190,14 +191,14 @@ describe("Asset Manager", function() {
       });
 
       it("check css resolution", function(){
-        assert.equal("<link href='/css/app3-e6c36427a5a3d44697c26ed1df3dd44c.css' rel='stylesheet' media='screen'/>", this.context.css("app3.css"));
-        assert.equal("<link href='/css/appWithUrl-2a43955240207f71d8dff237cfd37739.css' rel='stylesheet' media='screen'/>", this.context.css('appWithUrl.css'));
-        assert.equal("<link href='/css/fullModuleWithCSS-e6c36427a5a3d44697c26ed1df3dd44c.css' rel='stylesheet' media='screen'/>", this.context.css('fullModuleWithCSS.css'));
-        assert.equal("<link href='/css/app3-e6c36427a5a3d44697c26ed1df3dd44c.css' rel='stylesheet' media='print'/>", this.context.css({print : 'app3.css'}));
+        assert.equal("<link href='/css/app3-4e59135d3aeea0672797ddbe8bf86a62.css' rel='stylesheet' media='screen'/>", this.context.css("app3.css"));
+        assert.equal("<link href='/css/appWithUrl-3ac73be84e9a67a6bea6f970ab2b3074.css' rel='stylesheet' media='screen'/>", this.context.css('appWithUrl.css'));
+        assert.equal("<link href='/css/fullModuleWithCSS-1270a6f04e830b9b652f2e4ca320739e.css' rel='stylesheet' media='screen'/>", this.context.css('fullModuleWithCSS.css'));
+        assert.equal("<link href='/css/app3-4e59135d3aeea0672797ddbe8bf86a62.css' rel='stylesheet' media='print'/>", this.context.css({print : 'app3.css'}));
       });
 
       it("check less resolution", function(){
-        assert.equal("<link href='/css/lessTest-70a4e6eca7c6d5a960a6bb48fab71776.less.css' rel='stylesheet' media='screen'/>", this.context.css("lessTest.less"));
+        assert.equal("<link href='/css/lessTest-97caa06d1f8d1e46f3745171fef01eb3.less.css' rel='stylesheet' media='screen'/>", this.context.css("lessTest.less"));
       });
 
       it("check img resolution", function(){
@@ -209,7 +210,7 @@ describe("Asset Manager", function() {
       });
 
       it("css should resolve in module folder", function(){
-        expect("<link href='/css/other-e6c36427a5a3d44697c26ed1df3dd44c.css' rel='stylesheet' media='screen'/>").to.equal(this.context.css("other.css"));
+        expect("<link href='/css/other-1270a6f04e830b9b652f2e4ca320739e.css' rel='stylesheet' media='screen'/>").to.equal(this.context.css("other.css"));
       });
 
       it("check Angular resolution", function(){
