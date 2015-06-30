@@ -72,7 +72,8 @@ describe("contentResolver tests", function(){
       console.log('css.getContent', css.getContent('utf8'));
       console.log('css.getContentRaw', css.getContentRaw('utf8'));
       expect(css.getDiskPath()).to.equal(path.resolve("test/app1/css/app1.css"));
-      expect(css.getContent('utf8')).to.equal("body{display:block;color:#000}");
+      // expect css content to resolve without compression during devmode
+      expect(css.getContent('utf8')).to.equal("body{ display: block; color: black; }");
       expect(css.getContentRaw('utf8')).to.equal("body{ display: block; color: black; }");
     });
   });
