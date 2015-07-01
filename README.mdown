@@ -425,7 +425,7 @@ You should either change the Angular scope variable name or the translation key 
 Writing the translation key in all caps and the scope variables in CamelCase format should prevent this
 from happening.
 
-### How fonts are currently handled
+# How fonts are currently handled
 Right now, Frontier-Build-Tools will rewrite any path containing `/fonts` to begin with the CDN's domain. 
 It also currently has an override to set this CDN domain as the S3 bucket, rather than the edge CDN domain. 
 Upon further testing in our currently supported browsers, it seems the s3 domain is unneeded, 
