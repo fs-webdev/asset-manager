@@ -83,6 +83,13 @@ If you like, you can pass any of these options to the `start` or `precompile` fu
 * `gzip` (defaults to false): Whether or not to gzip the contents of 'css' and 'js' files.
 * `scanDir` (defaults to ''): Include a base path you want asset-manager to scan for modules that contain `asset-manifest.json` files indicating the module contains static assets that should be available for use.
 
+## Minification
+
+Asset manager currently minifies CSS and JS files, and JS assemblies.
+
+* CSS: Remove whitespace using `css-clean`
+* JS: Remove whitespace and mangle vars using `uglifyJS`
+
 # USAGE
 
 ##  assembly.json parameters
