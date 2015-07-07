@@ -179,7 +179,6 @@ describe("Asset Manager", function() {
       });
 
       it("check asset function existence", function(){
-        console.log('am this:', this);
         assert.isFunction(this.context.css);
         assert.isFunction(this.context.js);
         assert.isFunction(this.context.img);
@@ -266,8 +265,6 @@ describe("Asset Manager", function() {
         builtAssets: tmpDir,
         gzip: true
       }, function(){
-      //   var files = fs.readdirSync(path.join(tmpDir, "css"));
-      //   console.log('xfiles',files);
         assert.equal(true, fs.existsSync(path.join(tmpDir, "js", "app3-cb248e942f61a08ff6f783b491bcfa4e.js")), "app3 js file doesn't exist");
         assert.equal(true, fs.existsSync(path.join(tmpDir, "js", "app3-cb248e942f61a08ff6f783b491bcfa4e_raw.js")), "app3 raw js file doesn't exist");
       
@@ -301,7 +298,6 @@ describe("Asset Manager", function() {
         assert.equal("<script src='CDNPath/js/app3-cb248e942f61a08ff6f783b491bcfa4e_raw.js' ></script>", manifest['app3.js']["outputRaw"]);
       
         var cManifest = fs.readFileSync(path.join(tmpDir, "js", "clientManifest.js"), 'utf8');
-        console.log('cManifest', cManifest);
         var context = {};
         vm.runInNewContext(cManifest, context);
         cManifest = context.manifest;
@@ -327,8 +323,6 @@ describe("Asset Manager", function() {
         builtAssets: tmpDir,
         gzip: false
       }, function(){
-        var files = fs.readdirSync(path.join(tmpDir, "css"));
-        console.log('xfiles',files);
         var filePath = path.join(tmpDir, "css", "appWithUrl-038d6244aca722323a644df1a9127b4a.css");
         assert.equal(true, fs.existsSync(filePath));
         var contents = fs.readFileSync(filePath, 'UTF-8');
