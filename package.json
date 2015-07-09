@@ -1,7 +1,7 @@
 {
   "name": "asset-manager",
-  "description": "Asset manager built on top of connect-asset for managing multiple asset folders.",
-  "version": "0.9.1",
+  "description": "Asset manager built on top of awesomeness for multiple asset folders.",
+  "version": "1.0.0",
   "author": "FamilySearch Web Developers",
   "repository": {
     "type": "git",
@@ -9,29 +9,32 @@
   },
   "dependencies": {
     "async": "0.1.x",
-    "glob": "3.1.12",
-    "rimraf": "1.x",
-    "uglify-js": "1.2.x",
-    "less": "1.3.x",
+    "clean-css": "3.3.3",
     "coffee-script": "1.4.x",
+    "debug": "~0.7.2",
+    "glob": "3.1.12",
+    "less": "1.3.x",
+    "rimraf": "1.x",
     "stylus": "0.50.0",
-    "debug": "~0.7.2"
+    "uglify-js": "1.2.x"
   },
   "devDependencies": {
-    "mocha": "1.4.x",
     "chai": "1.6.x",
-    "sinon": "1.4.x"
+    "mocha": "1.4.x"
   },
   "scripts": {
     "test": "node_modules/.bin/mocha test/*-test.js -R spec"
   },
   "main": "lib/asset-manager.js",
   "engines": {
-    "node": ">= 0.8.3"
+    "node": ">= 0.10.x"
   },
   "contributors": [
     "Tim Shadel <tim.shadel@familysearch.org>",
     "Stephen Lynn <s.lynn@familysearch.org>",
-    "Mike Collins <CollinsMG@familysearch.org>"
+    "Mike Collins <CollinsMG@familysearch.org>",
+    "Steven Lambert <@lambertsteven>",
+    "Nathaniel Huff <huff@familysearch.org>",
+    "Jakob Anderson <@spacerockzero>"
   ]
 }

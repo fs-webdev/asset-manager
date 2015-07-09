@@ -1,1 +1,15 @@
 body {display:none}
+body {
+  display: block;
+  color: black;
+}
+div {
+  float: left;
+  position: absolute;
+  top: -99px;
+}
+article {
+  display: inline-block;
+  color: #333;
+  z-index: 100;
+}

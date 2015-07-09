@@ -8,6 +8,9 @@ browser to dynamically load static assets (e.g., people using the Inject depende
 
 [![build status](https://secure.travis-ci.org/fs-webdev/asset-manager.png)](http://travis-ci.org/fs-webdev/asset-manager)
 
+## Node Versions Supported:
+0.10.x through 0.12.x
+
 ## How?
 
 First, install it in your project's directory:
@@ -79,6 +82,13 @@ If you like, you can pass any of these options to the `start` or `precompile` fu
 * `context` (defaults to global): The object you want to hang the 'css', 'js', and 'img' functions on for resolving static assets.
 * `gzip` (defaults to false): Whether or not to gzip the contents of 'css' and 'js' files.
 * `scanDir` (defaults to ''): Include a base path you want asset-manager to scan for modules that contain `asset-manifest.json` files indicating the module contains static assets that should be available for use.
+
+## Minification
+
+Asset manager currently minifies CSS and JS files, and JS assemblies.
+
+* CSS: Remove whitespace using `css-clean`
+* JS: Remove whitespace and mangle vars using `uglifyJS`
 
 # USAGE
 

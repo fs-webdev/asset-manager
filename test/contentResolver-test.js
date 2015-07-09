@@ -22,7 +22,7 @@ describe("contentResolver tests", function(){
     it("for a css file", function() {
       var css = this.cf("", "app1", "css", "css");
       assert.equal(path.resolve("test/app1/css/app1.css"), css.getDiskPath());
-      assert.equal("body {}", css.getContent());
+      assert.equal("body{ display: block; color: black; }", css.getContentRaw());
     });
 
     it("for a img file", function() {
@@ -65,6 +65,14 @@ describe("contentResolver tests", function(){
       expect(js.getDiskPath()).to.equal(path.resolve("test/app1/js/app1.js"));
       expect(js.getContent('utf8')).to.equal("alert(\"hello\")");
       expect(js.getContentRaw('utf8')).to.equal("alert( 'hello' );");
+    });
+    
+    it("for a css file", function() {
+      var css = this.cf("", "app1", "css", "css");
+      expect(css.getDiskPath()).to.equal(path.resolve("test/app1/css/app1.css"));
+      // expect css content to resolve without compression during devmode
+      expect(css.getContent('utf8')).to.equal("body{ display: block; color: black; }");
+      expect(css.getContentRaw('utf8')).to.equal("body{ display: block; color: black; }");
     });
   });
 
