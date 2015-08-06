@@ -16,7 +16,6 @@
     "less": "1.3.x",
     "rimraf": "1.x",
     "stylus": "0.50.0",
-    "taas-translate": "git+https://github.com/fs-webdev/taas-translate.git",
     "uglify-js": "1.2.x"
   },
   "devDependencies": {
