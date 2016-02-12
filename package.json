@@ -1,7 +1,7 @@
 {
   "name": "asset-manager",
   "description": "Asset manager built on top of awesomeness for multiple asset folders.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "FamilySearch Web Developers",
   "repository": {
     "type": "git",
