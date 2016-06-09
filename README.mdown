@@ -1,5 +1,8 @@
 # asset-manager
 
+## Deprecated
+This project is no longer being maintained. There is a similar project for gulp called [gulp-component-assembler](https://github.com/intervalia/gulp-component-assembler), and there are many other modules on npm that do similar things.
+
 Static Asset Manager that allows you to declare multiple asset folders that will be searched when
 resolving static assets in your app.  This library also provides the ability to precompile all of the static assets
 into their production form (e.g., minified content with hashed filenames).  The precompile step generates a manifest
@@ -9,7 +12,7 @@ browser to dynamically load static assets (e.g., people using the Inject depende
 [![build status](https://secure.travis-ci.org/fs-webdev/asset-manager.png)](http://travis-ci.org/fs-webdev/asset-manager)
 
 ## Node Versions Supported:
-0.10.x through 0.12.x
+0.10.x through 4.x
 
 ## How?
 
